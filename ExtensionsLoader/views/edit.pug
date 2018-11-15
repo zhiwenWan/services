@@ -1,0 +1,39 @@
+extends layout
+
+block content
+  h1= title
+
+  table.table.table-striped
+    thead
+      tr
+        td File
+        td Delete
+    tbody    
+    each val in files
+      tr
+       td=val
+       td 
+          a(class='button', href='/edit', download=val, onclick='deleteFile(event, href, download)') delete
+  div
+    button(class='showform') upload
+
+  <form method="post" enctype="multipart/form-data">
+    <div>
+      <label for="uploadFile">Choose extension to upload </label>
+      <input type="file" id="uploadFile" name="uploadFile" accept="application/x-chrome-extension, text/xml">
+    </div>
+    <div class="preview">
+      <p>No files currently selected for upload</p>
+    </div>
+    <div>
+      <button class="submit">Upload</button>
+    </div>
+  </form>
+
+  script(src="/javascripts/form.js") 
+  script(src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.3.1.min.js") 
+
+  if errors 
+    ul
+      for error in errors
+        li!= error.msg
