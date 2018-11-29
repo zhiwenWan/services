@@ -1,0 +1,23 @@
+extends layout
+
+block content
+  h1= title
+
+  table.table.table-bordered
+    thead
+      tr
+        td Name
+        td Size
+        td Date Modified
+    tbody    
+    each val in files
+      tr
+       td=val
+       
+
+  script(src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.3.1.min.js") 
+
+  if errors 
+    ul
+      for error in errors
+        li!= error.msg
