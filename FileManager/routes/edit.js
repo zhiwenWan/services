@@ -34,7 +34,18 @@ router.get('/', function(req, res, next) {
 
 // upload the file to the server
 router.post('/', upload.single('uploadFile'), function(req, res) {
-  res.send("File upload sucessfully.");
+  try{
+    var name = req.file.filename;
+
+    if (req.file.size <= 0) {
+        res.send (name + " size is zero!!!");
+    }
+    else {
+      res.send( name + " was uploaded successfully!");
+    }
+  } catch(err) {
+    res.sendStatus(400);
+  }
 });
 
 // delete the file, pass file name with query string
